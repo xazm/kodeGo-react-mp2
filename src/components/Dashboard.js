@@ -1,9 +1,10 @@
 import React from "react";
+import Sidebar from "./Sidebar";
 
 function Dashboard() {
   return (
-    <div>
-      <h2 className="text-white">This is my dashboard</h2>
+    <div className="bg-black vh-100 container-fluid position-relative d-flex p-0 ">
+      <Sidebar />
     </div>
   );
 }

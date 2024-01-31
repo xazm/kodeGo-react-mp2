@@ -7,6 +7,7 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
+  const history = useHistory();
 
   const handleUsername = (e) => {
     setUsername(e.target.value);
@@ -15,19 +16,43 @@ function Login() {
   const handlePassword = (e) => {
     setPassword(e.target.value);
   };
-  const history = useHistory();
+
   // THIS IS MY ORIGINAL FUNCTION
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault(); // Prevents the default form submission behavior
 
     // Basic validation
-    if (username === "user" && password === "password") {
-      // Successful login redirect to dashboard
-      history.push("/dashboard");
-      alert("Login successful!");
-    } else {
-      setLoginError("Invalid username or password");
+
+    // if (username === "user" && password === "password") {
+    //   // Successful login redirect to dashboard
+    //   history.push("/dashboard");
+    //   alert("Login successful!");
+    // } else {
+    //   setLoginError("Invalid username or password");
+    // }
+
+    try {
+      const response = await fetch("http://localhost:5000/login-validation", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+      const data = await response.json();
+
+      if (response.status === 200) {
+        // Successful login
+        alert("Login successful!");
+        history.push("/dashboard");
+      } else {
+        // Failed login
+        setLoginError("Invalid username or password");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      setLoginError("An error occurred during login");
     }
   };
 
