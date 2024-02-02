@@ -63,7 +63,12 @@ function Login() {
           <div className="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
             <form onSubmit={handleLogin}>
               <div className="d-flex align-items-center justify-content-between mb-3">
-                <img src={companyLogo} alt="Logo" className="img-fluid logo" />
+                <img
+                  src={companyLogo}
+                  alt="Logo"
+                  className="img-fluid logo"
+                  style={{ width: "120px" }}
+                />
                 <h3>Log In</h3>
               </div>
               <div className="p-2px p-sm-3px my-2 mx-2 col-8">
@@ -91,7 +96,7 @@ function Login() {
                 />
                 <label>Password</label>
               </div>
-              <button type="submit" className="btn btn-primary py-3 w-100 mb-4">
+              <button type="submit" className="btn btn-warning py-3 w-100 mb-4">
                 Login
               </button>
             </form>

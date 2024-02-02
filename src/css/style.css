@@ -1,6 +1,6 @@
 /********** Template CSS **********/
 :root {
-  --primary: #eb1616;
+  --primary: #ffc107;
   --secondary: #191c24;
   --light: #6c7293;
   --dark: #000000;
@@ -120,6 +120,19 @@ h6 {
 }
 
 /*** Navbar ***/
+
+.logo {
+  width: 50px;
+}
+
+h3 {
+  margin-top: 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0 !important;
+}
+
 .sidebar .navbar .navbar-nav .nav-link {
   padding: 7px 20px;
   color: var(--light);

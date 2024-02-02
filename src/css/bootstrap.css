@@ -81,7 +81,7 @@ h5,
 h6,
 .h6 {
   margin-top: 0;
-  margin-bottom: 0.5rem;
+
   font-family: "Roboto", sans-serif;
   font-weight: 700;
   line-height: 1.2;
@@ -376,7 +376,7 @@ legend + * {
 }
 [type="search"] {
   outline-offset: -2px;
-  -webkit-appearance: textfield;
+  /* -webkit-appearance: textfield; */
 }
 ::-webkit-search-decoration {
   -webkit-appearance: none;
@@ -1839,9 +1839,9 @@ progress {
 .form-control:focus {
   color: #6c7293;
   background-color: #000;
-  border-color: #f58b8b;
+  border-color: var(--bs-orange);
   outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(235, 22, 22, 0.25);
+  box-shadow: 0 0 0 0.25rem rgba(248, 212, 8, 0.25);
 }
 .form-control::-webkit-date-and-time-value {
   height: 1.5em;
@@ -2041,7 +2041,7 @@ textarea.form-control-lg {
   background-size: contain;
   border: 1px solid rgba(0, 0, 0, 0.25);
   appearance: none;
-  color-adjust: exact;
+  /* color-adjust: exact; */
 }
 .form-check-input[type="checkbox"] {
   border-radius: 0.25em;
