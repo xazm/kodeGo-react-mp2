@@ -1,15 +1,14 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import {  Navigate, Outlet } from "react-router-dom";
 
-function PrivateRoute({ component: Component, ...rest }) {
-  const isAuthenticated = /* Check if the user is authenticated */ true;
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        isAuthenticated ? <Component {...props} /> : <Redirect to="/login" />
-      }
-    />
-  );
-}
+const PrivateRoute = ({ userData, redirectPath = '/', children }) => {
+    if (userData.isAuthenticated === false|| userData.isAuthenticated === 'error') {
+        return <Navigate to={redirectPath} replace />;
+    }
+
+    return children ? children : <Outlet />;
+};
 export default PrivateRoute;
+
+
+

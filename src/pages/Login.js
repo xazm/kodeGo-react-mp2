@@ -1,9 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import companyLogo from "../assets/companyLogo.png";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
@@ -15,7 +16,7 @@ function Login() {
   const handlePassword = (e) => {
     setPassword(e.target.value);
   };
-  const history = useHistory();
+
   // THIS IS MY ORIGINAL FUNCTION
 
   const handleLogin = (e) => {
@@ -24,7 +25,7 @@ function Login() {
     // Basic validation
     if (username === "user" && password === "password") {
       // Successful login redirect to dashboard
-      history.push("/dashboard");
+      navigate("/dashboard");
       alert("Login successful!");
     } else {
       setLoginError("Invalid username or password");

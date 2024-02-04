@@ -1,0 +1,13 @@
+.logo {
+    width: 75px !important;
+    height: 75px;
+    display: flex;
+    img {
+        object-fit: contain;
+        width: 100%;
+    }
+}
+
+body {
+    background: red;
+}
