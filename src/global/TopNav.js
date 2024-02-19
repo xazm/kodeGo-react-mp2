@@ -1,28 +1,20 @@
 import React from "react";
-// import "../css/style.css";
-import "../css/bootstrap.css";
-import { useState } from "react";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import MyImg from "../assets/MyImg.png";
 
-function TopNav() {
-  const [sideBarToggle, setSideBarToggle] = useState(false);
-
-  const toggleNavbar = () => {
-    setSideBarToggle(!sideBarToggle);
-
-    console.log("btn");
-  };
+function TopNav({ toggleSidebar }) {
   return (
-    <div className="content">
+    <div className="">
       <div className="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
         <div className="navbar-brand d-flex d-lg-none me-4">
           <h2 className="text-primary mb-0">
             <i className="fa fa-user-edit"></i>
           </h2>
         </div>
-        <div className="sidebar-toggler flex-shrink-0" onClick={toggleNavbar}>
+        <div className="sidebar-toggler flex-shrink-0" onClick={toggleSidebar}>
+          {/* heres my toggle navbar */}
           <i className="fa fa-bars"></i>
         </div>
+
         <form className="d-none d-md-flex ms-4">
           <input
             className="form-control bg-dark border-0"
@@ -30,10 +22,11 @@ function TopNav() {
             placeholder="Search"
           />
         </form>
+
         {/* the rest of code Topnav */}
         <div className="navbar-nav align-items-center ms-auto">
           <div className="nav-item dropdown">
-            <div className="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+            <div className="nav-link dropdown-toggle">
               <i className="fa fa-envelope me-lg-2"></i>
               <span className="d-none d-lg-inline-flex">Message</span>
             </div>
@@ -72,7 +65,7 @@ function TopNav() {
                 <div className="d-flex align-items-center">
                   <img
                     className="rounded-circle"
-                    src="img/user.jpg"
+                    src=""
                     alt=""
                     style={{ width: "40px", height: "40px" }}
                   />
@@ -87,7 +80,7 @@ function TopNav() {
             </div>
           </div>
           <div className="nav-item dropdown">
-            <div className="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+            <div className="nav-link dropdown-toggle">
               <i className="fa fa-bell me-lg-2"></i>
               <span className="d-none d-lg-inline-flex">Notificatin</span>
             </div>
@@ -113,10 +106,10 @@ function TopNav() {
             </div>
           </div>
           <div className="nav-item dropdown">
-            <div className="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+            <div className="nav-link dropdown-toggle">
               <img
                 className="rounded-circle me-lg-2"
-                src="img/user.jpg"
+                src={MyImg}
                 alt=""
                 style={{ width: "40px", height: "40px" }}
               />
@@ -130,7 +123,10 @@ function TopNav() {
           </div>
         </div>
       </div>
+      {/* //// */}
     </div>
+
+    ///////
   );
 }
 

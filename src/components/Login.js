@@ -1,13 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import companyLogo from "../assets/companyLogo.png";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  // const [authenticate, setAuthenticate] = useState(false);
   const [loginError, setLoginError] = useState("");
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleUsername = (e) => {
     setUsername(e.target.value);
@@ -41,11 +42,12 @@ function Login() {
         body: JSON.stringify({ username, password }),
       });
       const data = await response.json();
-
+      console.log(data);
       if (response.status === 200) {
         // Successful login
+
         alert("Login successful!");
-        history.push("/dashboard");
+        navigate("/inventory");
       } else {
         // Failed login
         setLoginError("Invalid username or password");
@@ -74,7 +76,7 @@ function Login() {
               <div className="p-2px p-sm-3px my-2 mx-2 col-8">
                 {loginError && <p style={{ color: "white" }}>{loginError}</p>}
               </div>
-              <div className="form-floating mb-3">
+              <div className="form-floating mb-3 ">
                 <input
                   type="text"
                   className=" form-control"

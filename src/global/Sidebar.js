@@ -1,11 +1,13 @@
 import React from "react";
-import "../css/style.css";
 import companyLogo from "../assets/companyLogo.png";
 import MyImg from "../assets/MyImg.png";
-import TopNav from "./TopNav";
-function Sidebar(sideBarToggle) {
+import "bootstrap/js/dist/dropdown";
+import { Link } from "react-router-dom";
+
+function Sidebar({ visible }) {
+  const sidebarClass = visible ? "sidebar" : "sidebar hidden";
   return (
-    <div className={` sidebar  ${sideBarToggle ? "open" : ""}`}>
+    <div id="sidebar-content" className={sidebarClass}>
       <div className="sidebar pe-4 pb-3">
         <nav className="navbar navbar-dark">
           <div className=" d-flex align-items-center navbar-brand mx-4 mb-3">
@@ -34,19 +36,32 @@ function Sidebar(sideBarToggle) {
             </div>
           </div>
           <div className="navbar-nav w-100">
-            <div className="nav-item nav-link active">
+            <Link to="/dashboard" className="nav-item nav-link active">
               <i className="fa fa-tachometer-alt me-2"></i>Dashboard
+            </Link>
+            <div className="nav-item dropdown">
+              <div
+                className="nav-item nav-link dropdown-toggle"
+                data-bs-toggle="dropdown"
+              >
+                <i className="fa fa-keyboard me-2"></i>Forms
+              </div>
+
+              <div className="dropdown-menu bg-transparent border-0">
+                <Link to="/invoice-form" className="dropdown-item">
+                  Invoice form
+                </Link>
+                <Link to="/quotation-form" className="dropdown-item">
+                  Quotaion
+                </Link>
+                <div className="dropdown-item">Blank Page</div>
+                <div className="dropdown-item">Blank Page</div>
+              </div>
             </div>
 
-            <a href="widget.html" className="nav-item nav-link">
-              <i className="fa fa-th me-2"></i>Widgets
-            </a>
-            <a href="form.html" className="nav-item nav-link">
-              <i className="fa fa-keyboard me-2"></i>Forms
-            </a>
-            <a href="table.html" className="nav-item nav-link">
-              <i className="fa fa-table me-2"></i>Tables
-            </a>
+            <Link to="/inventory" className="nav-item nav-link">
+              <i className="fa fa-table me-2"></i>Inventory
+            </Link>
             <a href="chart.html" className="nav-item nav-link">
               <i className="fa fa-chart-bar me-2"></i>Charts
             </a>

@@ -1,25 +1,39 @@
 import "./App.css";
 import {
   BrowserRouter as Router,
+  Routes,
   Route,
-  Redirect,
-  Switch,
+  Navigate,
 } from "react-router-dom";
 import Login from "./components/Login";
-import Dashboard from "./components/Dashboard";
-import PrivateRoute from "./components/PrivateRoute";
+// import PrivateRoute from "./components/PrivateRoute";
+import RootLayout from "./global/RootLayout";
+import Dashboard from "./pages/Dashboard";
+import Inventory from "./pages/Inventory";
+import InvoicePage from "./pages/InvoicePage";
+import Quotation from "./pages/Quotation";
+function App(authenticate) {
+  const userData = authenticate;
 
-function App() {
   return (
-    <div className="container-fluid position-relative d-flex p-0 bg-dark ">
-      <Router>
-        <Switch>
-          <Route path="/login" component={Login} />
-          <PrivateRoute path="/dashboard" component={Dashboard} />
-          <Redirect from="/" to="/dashboard" />
-        </Switch>
-      </Router>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<RootLayout />}>
+          {userData ? (
+            <>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/inventory" element={<Inventory />} />
+              <Route path="/invoice-form" element={<InvoicePage />} />
+              <Route path="/quotation-form" element={<Quotation />} />
+            </>
+          ) : (
+            <Navigate to="/login" />
+          )}
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 

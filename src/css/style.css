@@ -298,3 +298,20 @@ h3 {
   background: var(--dark);
   border-color: var(--primary);
 }
+
+/* /////////// */
+
+.invoice-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.head-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.right {
+  align-items: flex-end;
+}
