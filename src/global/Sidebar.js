@@ -57,8 +57,8 @@ function Sidebar({ visible }) {
               </div>
             </div>
 
-            <Link to="/inventory" className="nav-item nav-link">
-              <i className="fa fa-table me-2"></i>Inventory
+            <Link to="/invoice-list" className="nav-item nav-link">
+              <i className="fa fa-table me-2"></i>Invoice
             </Link>
             <Link to="/quotaion-list" className="nav-item nav-link">
               <i className="fa fa-chart-bar me-2"></i>Quotaion

@@ -12,7 +12,7 @@ import Dashboard from "./pages/Dashboard";
 import InvoicePage from "./pages/InvoicePage";
 import Quotation from "./pages/Quotation";
 import QuotaionList from "./pages/QuotaionList";
-import InventoryList from "./pages/InventoryList";
+import InvoiceList from "./pages/InvoiceList";
 function App(authenticate) {
   const userData = authenticate;
 
@@ -24,7 +24,7 @@ function App(authenticate) {
           {userData ? (
             <>
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/inventory" element={<InventoryList />} />
+              <Route path="/invoice-list" element={<InvoiceList />} />
               <Route path="/invoice-form" element={<InvoicePage />} />
               <Route path="/quotation-form" element={<Quotation />} />
               <Route path="/quotaion-list" element={<QuotaionList />} />

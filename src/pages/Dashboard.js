@@ -9,7 +9,7 @@ function Dashboard() {
   return (
     <div>
       <div className="container-fluid pt-4 px-4">
-        <div className="row g-4">
+        <div className=" row g-4">
           <div className="col-sm-6 col-xl-3">
             <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
               <i className="fa fa-chart-line fa-3x text-primary"></i>
@@ -52,7 +52,7 @@ function Dashboard() {
             <div className="bg-secondary text-center rounded p-4">
               <div className="d-flex align-items-center justify-content-between mb-4">
                 <h6 className="mb-0">Recent Salse</h6>
-                <Link to="/">Show All</Link>
+                <Link to="/invoice-list">Show All</Link>
               </div>
               <div className="table-responsive">
                 <table className="table text-start align-middle table-bordered table-hover mb-0">
@@ -67,6 +67,96 @@ function Dashboard() {
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>01 Jan 2045</td>
+                      <td>INV-0123</td>
+                      <td>Jhon Doe</td>
+                      <td>$123</td>
+                      <td>Paid</td>
+                      <td>
+                        <button className="btn btn-sm btn-primary">
+                          Detail
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>01 Jan 2045</td>
+                      <td>INV-0123</td>
+                      <td>Jhon Doe</td>
+                      <td>$123</td>
+                      <td>Paid</td>
+                      <td>
+                        <button className="btn btn-sm btn-primary">
+                          Detail
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>01 Jan 2045</td>
+                      <td>INV-0123</td>
+                      <td>Jhon Doe</td>
+                      <td>$123</td>
+                      <td>Paid</td>
+                      <td>
+                        <button className="btn btn-sm btn-primary">
+                          Detail
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>01 Jan 2045</td>
+                      <td>INV-0123</td>
+                      <td>Jhon Doe</td>
+                      <td>$123</td>
+                      <td>Paid</td>
+                      <td>
+                        <button className="btn btn-sm btn-primary">
+                          Detail
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>01 Jan 2045</td>
+                      <td>INV-0123</td>
+                      <td>Jhon Doe</td>
+                      <td>$123</td>
+                      <td>Paid</td>
+                      <td>
+                        <button className="btn btn-sm btn-primary">
+                          Detail
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>01 Jan 2045</td>
+                      <td>INV-0123</td>
+                      <td>Jhon Doe</td>
+                      <td>$123</td>
+                      <td>Paid</td>
+                      <td>
+                        <button className="btn btn-sm btn-primary">
+                          Detail
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
                   <tbody>
                     <tr>
                       <td>1</td>
