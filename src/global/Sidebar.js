@@ -1,7 +1,7 @@
 import React from "react";
 import companyLogo from "../assets/companyLogo.png";
 import MyImg from "../assets/MyImg.png";
-import "bootstrap/js/dist/dropdown";
+// import "bootstrap/js/dist/dropdown";
 import { Link } from "react-router-dom";
 
 function Sidebar({ visible }) {
@@ -54,17 +54,15 @@ function Sidebar({ visible }) {
                 <Link to="/quotation-form" className="dropdown-item">
                   Quotaion
                 </Link>
-                <div className="dropdown-item">Blank Page</div>
-                <div className="dropdown-item">Blank Page</div>
               </div>
             </div>
 
             <Link to="/inventory" className="nav-item nav-link">
               <i className="fa fa-table me-2"></i>Inventory
             </Link>
-            <a href="chart.html" className="nav-item nav-link">
-              <i className="fa fa-chart-bar me-2"></i>Charts
-            </a>
+            <Link to="/quotaion-list" className="nav-item nav-link">
+              <i className="fa fa-chart-bar me-2"></i>Quotaion
+            </Link>
           </div>
         </nav>
       </div>

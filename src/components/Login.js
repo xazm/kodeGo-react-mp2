@@ -47,7 +47,7 @@ function Login() {
         // Successful login
 
         alert("Login successful!");
-        navigate("/inventory");
+        navigate("/dashboard");
       } else {
         // Failed login
         setLoginError("Invalid username or password");

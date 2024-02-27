@@ -4,6 +4,7 @@ import Sidebar from "./Sidebar";
 import Layout from "./Layout";
 import "../css/bootstrap.css";
 import "../css/style.css";
+import Footer from "./Footer";
 
 function RootLayout() {
   return (
@@ -13,6 +14,7 @@ function RootLayout() {
         <div className="content ">
           <TopNav />
           <Layout />
+          <Footer />
         </div>
       </div>
     </div>

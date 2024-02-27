@@ -315,3 +315,7 @@ h3 {
 .right {
   align-items: flex-end;
 }
+
+.btn-total {
+  display: flex;
+}

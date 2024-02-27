@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import companyLogo from "../assets/companyLogo.png";
 import Button from "react-bootstrap/Button";
@@ -7,17 +6,47 @@ import "../css/style.css";
 import apiRequest from "../dataFetch/apiFetch";
 
 function InvoicePage() {
+  const [fullName, setFullName] = useState("");
+  const [address, setAddress] = useState("");
+  const [contact, setContact] = useState("");
+  const [invoice, setInvoice] = useState("");
+  const [date, setDate] = useState("");
+  const [mobile, setMobile] = useState("");
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
   const [total, setTotal] = useState("");
   const [product, setProduct] = useState("");
-  // const [action, setAction] = useState("");
   const [invoiceProd, setInvoiceProd] = useState([]);
+  const [allTotal, setAlltotal] = useState("");
 
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
 
+  const fullNameHandle = (fullName) => {
+    setFullName(fullName);
+    console.log(fullName);
+  };
+  const addressHandle = (address) => {
+    setAddress(address);
+    console.log(address);
+  };
+  const contactHandle = (contact) => {
+    setContact(contact);
+    console.log(contact);
+  };
+  const invoiceHandle = (invoice) => {
+    setInvoice(invoice);
+    console.log(invoice);
+  };
+  const dateHandle = (date) => {
+    setDate(date);
+    console.log(date);
+  };
+  const mobileHandle = (mobile) => {
+    setMobile(mobile);
+    console.log(mobile);
+  };
   const quantityHandle = (quantity) => {
     // my quantity handle
     setQuantity(quantity);
@@ -34,6 +63,7 @@ function InvoicePage() {
     setProduct(product);
   };
 
+  // modal save btn
   const handleSave = async () => {
     const objReq = {
       method: "POST",
@@ -45,7 +75,7 @@ function InvoicePage() {
         quantity +
         "&price=" +
         price +
-        "&code=" +
+        "&product=" +
         product +
         "&total=" +
         total,
@@ -55,16 +85,28 @@ function InvoicePage() {
       "http://localhost:5000/invoiceProduct",
       objReq
     );
-    console.log(data.invoiceProductDB);
+    console.log(data);
 
+    let dataProd = data.invoiceProductDB;
+    let allTotal = 0;
+    // console.log(` this is the data ${dataProd}`);
+
+    // for tom add loop again to get the total value
+    // for loop j= total
+    for (let i = 0; i < dataProd.length; i++) {
+      var subTotal = dataProd[i].total;
+      allTotal += parseFloat(subTotal);
+      console.log(allTotal);
+      setAlltotal(allTotal.toFixed(2));
+    }
+
+    // response
     if (data.code === "success") {
       setInvoiceProd(data.invoiceProductDB);
       console.log("Ok save ");
     } else {
       console.log("Not save");
     }
-
-    // handleReadData();
 
     setShow(false);
   };
@@ -74,7 +116,6 @@ function InvoicePage() {
   const updateItem = (id) => {
     alert(id);
   };
-
   return (
     <div className="container-fluid pt-4 px-4 ">
       <div className=" invoice-header-container bg-secondary p-4">
@@ -107,6 +148,8 @@ function InvoicePage() {
                 type="text"
                 className="form-control"
                 placeholder="Full Name"
+                value={fullName}
+                onChange={(e) => fullNameHandle(e.target.value)}
               />
             </div>
             <div className="col-8 mb-2">
@@ -114,6 +157,8 @@ function InvoicePage() {
                 type="text"
                 className="form-control"
                 placeholder="Address"
+                value={address}
+                onChange={(e) => addressHandle(e.target.value)}
               />
             </div>
             <div className="col-8 mb-2">
@@ -121,6 +166,8 @@ function InvoicePage() {
                 type="number"
                 className="form-control"
                 placeholder="Contact"
+                value={contact}
+                onChange={(e) => contactHandle(e.target.value)}
               />
             </div>
           </div>
@@ -130,16 +177,26 @@ function InvoicePage() {
                 type="text"
                 className="form-control"
                 placeholder="Invoice #"
+                value={invoice}
+                onChange={(e) => invoiceHandle(e.target.value)}
               />
             </div>
             <div className="col-8 mb-2">
-              <input type="text" className="form-control" placeholder="Date" />
+              <input
+                type="date"
+                className="form-control"
+                placeholder="Date"
+                value={date}
+                onChange={(e) => dateHandle(e.target.value)}
+              />
             </div>
             <div className="col-8 mb-2">
               <input
                 type="number"
                 className="form-control"
                 placeholder="Mobile"
+                value={mobile}
+                onChange={(e) => mobileHandle(e.target.value)}
               />
             </div>
           </div>
@@ -171,9 +228,10 @@ function InvoicePage() {
                 <tr key={i}>
                   <td>{item.id}</td>
                   <td>{item.qty}</td>
-                  <td>{item.code}</td>
-                  <td>{item.price}</td>
-                  <td>{item.total}</td>
+                  <td>{item.product}</td>
+                  <td>₱{item.price}</td>
+                  <td>₱{item.total}</td>
+
                   <td className=" col-md-2  col-sm-3 ">
                     <Button
                       variant="outline-info my-1 "
@@ -190,10 +248,24 @@ function InvoicePage() {
               ))}
             </tbody>
           </table>
-
-          <button className="btn btn-sm btn-warning my-2" onClick={handleShow}>
-            add
-          </button>
+          <div className=" container-fluid justify-content-between btn-total">
+            <button
+              className="btn btn-sm btn-warning my-2"
+              onClick={handleShow}
+            >
+              add
+            </button>
+            <div className=" col-xl-5 p-2 col-lg-6 col-sm-5 col-xs-12 ">
+              <div className="d-flex col-lg-10   justify-content-between align-items-center">
+                <div className="h1">Total</div>
+                <div className="h3">₱{allTotal}</div>
+              </div>
+            </div>
+          </div>
+          <div className=" mt-5 gap-2 mx-5 d-flex justify-content-end">
+            <Button variant="success">Paid</Button>{" "}
+            <Button variant="light">Draft</Button>{" "}
+          </div>
         </div>
         <div>
           <Modal show={show} onHide={handleClose} className=" shadow ">
