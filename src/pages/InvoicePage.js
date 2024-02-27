@@ -64,14 +64,16 @@ function InvoicePage() {
   };
 
   // modal save btn
-  const handleSave = async () => {
+  const handleSave = async (id) => {
     const objReq = {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body:
-        "qty=" +
+        "id=" +
+        id +
+        "&qty=" +
         quantity +
         "&price=" +
         price +
@@ -85,14 +87,26 @@ function InvoicePage() {
       "http://localhost:5000/invoiceProduct",
       objReq
     );
-    console.log(data);
 
-    let dataProd = data.invoiceProductDB;
-    let allTotal = 0;
-    // console.log(` this is the data ${dataProd}`);
+    const dataProd = data.invoiceProductDB;
+    // // let dataInvoice = data.invoiceProductDB;
 
-    // for tom add loop again to get the total value
-    // for loop j= total
+    // // for (let i = 0; i < dataInvoice.length; i++) {
+    // //   for (let j = 0; i < dataInvoice[i].productDB.length; j++) {
+    // //     if (j === 0) {
+    // //       // console.log(dataInvoice[i].productDB[j]);
+
+    // //       // response
+    // //       setInvoiceProd(dataInvoice[i].productDB);
+    // //     }
+    // //   }
+    // // }
+    // if (data.code === "success") {
+    //   console.log("Ok save ");
+    // } else {
+    //   console.log("Not save");
+    // }
+    var allTotal = 0;
     for (let i = 0; i < dataProd.length; i++) {
       var subTotal = dataProd[i].total;
       allTotal += parseFloat(subTotal);
@@ -100,16 +114,17 @@ function InvoicePage() {
       setAlltotal(allTotal.toFixed(2));
     }
 
-    // response
+    // response;
     if (data.code === "success") {
-      setInvoiceProd(data.invoiceProductDB);
+      console.log(data.invoiceProductDB);
+      setInvoiceProd(data.invoiceProductDB[0].productDB);
       console.log("Ok save ");
     } else {
       console.log("Not save");
     }
-
     setShow(false);
   };
+
   const deleteItem = (id) => {
     alert(id);
   };
@@ -318,7 +333,7 @@ function InvoicePage() {
               <Button onClick={handleClose} className="btn btn-primary">
                 Close
               </Button>
-              <Button className="btn btn-warning" onClick={handleSave}>
+              <Button className="btn btn-warning" onClick={() => handleSave(1)}>
                 Add
               </Button>
             </Modal.Footer>
