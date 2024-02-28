@@ -19,6 +19,7 @@ function InvoicePage() {
   const [invoiceProd, setInvoiceProd] = useState([]);
   const [allTotal, setAlltotal] = useState("");
 
+  // modal
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -64,7 +65,7 @@ function InvoicePage() {
   };
 
   // modal save btn
-  const handleSave = async (id) => {
+  const handleSaveProd = async (id) => {
     const objReq = {
       method: "POST",
       headers: {
@@ -333,7 +334,10 @@ function InvoicePage() {
               <Button onClick={handleClose} className="btn btn-primary">
                 Close
               </Button>
-              <Button className="btn btn-warning" onClick={() => handleSave(1)}>
+              <Button
+                className="btn btn-warning"
+                onClick={() => handleSaveProd(1)}
+              >
                 Add
               </Button>
             </Modal.Footer>

@@ -7,8 +7,9 @@ function Footer() {
         <div className="bg-secondary rounded-top p-4">
           <div className="d-flex">
             <div className="col-12 col-sm-6 text-center text-sm-start">
-              &copy; <a href="xmartfinds.co">M Autoshop & Accessories</a>, All
-              Right Reserved.
+              &copy;{" "}
+              <a href="https://www.xmartfinds.co">M Autoshop & Accessories</a>,
+              All Right Reserved.
             </div>
             <div className="col-12 col-sm-6 text-center text-sm-end ">
               Designed By{" "}

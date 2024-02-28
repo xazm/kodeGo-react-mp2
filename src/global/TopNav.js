@@ -12,6 +12,7 @@ function TopNav({ toggleSidebar }) {
           </h2>
         </div>
         <div className="sidebar-toggler flex-shrink-0" onClick={toggleSidebar}>
+          {/* here's my topNav menu button, */}
           <i className="fa fa-bars"></i>
         </div>
 
@@ -22,10 +23,10 @@ function TopNav({ toggleSidebar }) {
             placeholder="Search"
           />
         </form>
-
+        {/* some of my code */}
         <div className="navbar-nav align-items-center ms-auto">
           <div className="nav-item dropdown">
-            <div className="nav-link dropdown-toggle">
+            <div className="nav-link dropdown-toggle" data-bs-toggle="dropdown">
               <img
                 className="rounded-circle me-lg-2"
                 src={MyImg}

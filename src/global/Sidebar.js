@@ -4,10 +4,9 @@ import MyImg from "../assets/MyImg.png";
 // import "bootstrap/js/dist/dropdown";
 import { Link } from "react-router-dom";
 
-function Sidebar({ visible }) {
-  const sidebarClass = visible ? "sidebar" : "sidebar hidden";
+function Sidebar({ sidebarOpen }) {
   return (
-    <div id="sidebar-content" className={sidebarClass}>
+    <div id="sidebar-content" open={sidebarOpen}>
       <div className="sidebar pe-4 pb-3">
         <nav className="navbar navbar-dark">
           <div className=" d-flex align-items-center navbar-brand mx-4 mb-3">

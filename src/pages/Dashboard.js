@@ -3,13 +3,53 @@ import React from "react";
 // import TopNav from "../global/TopNav";
 import "../css/style.css";
 import "../css/bootstrap.css";
+import { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
+
 function Dashboard() {
+  const [allInvoiceDB, setAllInvoiceDB] = useState([]);
+
+  /// Functions
+  // new invoice
+  const createNewInvoice = () => {};
+
+  // update detail
+  const updateDetail = async (id) => {
+    const response = await fetch("http://localhost:5000//invoiceDetail/" + id);
+    const data = await response.json();
+  };
+
+  //all Invoice DB
+  const handleAllInvoice = async () => {
+    const token = localStorage.getItem("accessToken");
+    // let newToken = token.replace(/"/g, "");
+    let newToken = token;
+    // console.log(token);
+    const response = await fetch("http://localhost:5000/get_all_invoice", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${newToken}`,
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setAllInvoiceDB(data);
+      });
+  };
+
+  useEffect(() => {
+    handleAllInvoice();
+  }, []); // on load page
+
   return (
     <div>
       <div className="container-fluid pt-4 px-4">
-        <div className=" row g-4">
+        <div className="row g-4">
           <div className="col-sm-6 col-xl-3">
             <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
               <i className="fa fa-chart-line fa-3x text-primary"></i>
@@ -51,7 +91,11 @@ function Dashboard() {
           <div className="container-fluid pt-4 px-4">
             <div className="bg-secondary text-center rounded p-4">
               <div className="d-flex align-items-center justify-content-between mb-4">
-                <h6 className="mb-0">Recent Salse</h6>
+                <div className="btn btn-warning" onClick={createNewInvoice}>
+                  <i className="fa fa-plus"> Create New</i>
+                </div>
+                <h6 className="mb-0">Recent Sale</h6>
+
                 <Link to="/invoice-list">Show All</Link>
               </div>
               <div className="table-responsive">
@@ -67,110 +111,27 @@ function Dashboard() {
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
+
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>01 Jan 2045</td>
-                      <td>INV-0123</td>
-                      <td>Jhon Doe</td>
-                      <td>$123</td>
-                      <td>Paid</td>
-                      <td>
-                        <button className="btn btn-sm btn-primary">
-                          Detail
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>01 Jan 2045</td>
-                      <td>INV-0123</td>
-                      <td>Jhon Doe</td>
-                      <td>$123</td>
-                      <td>Paid</td>
-                      <td>
-                        <button className="btn btn-sm btn-primary">
-                          Detail
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>01 Jan 2045</td>
-                      <td>INV-0123</td>
-                      <td>Jhon Doe</td>
-                      <td>$123</td>
-                      <td>Paid</td>
-                      <td>
-                        <button className="btn btn-sm btn-primary">
-                          Detail
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>01 Jan 2045</td>
-                      <td>INV-0123</td>
-                      <td>Jhon Doe</td>
-                      <td>$123</td>
-                      <td>Paid</td>
-                      <td>
-                        <button className="btn btn-sm btn-primary">
-                          Detail
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>01 Jan 2045</td>
-                      <td>INV-0123</td>
-                      <td>Jhon Doe</td>
-                      <td>$123</td>
-                      <td>Paid</td>
-                      <td>
-                        <button className="btn btn-sm btn-primary">
-                          Detail
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>01 Jan 2045</td>
-                      <td>INV-0123</td>
-                      <td>Jhon Doe</td>
-                      <td>$123</td>
-                      <td>Paid</td>
-                      <td>
-                        <button className="btn btn-sm btn-primary">
-                          Detail
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>01 Jan 2045</td>
-                      <td>INV-0123</td>
-                      <td>Jhon Doe</td>
-                      <td>$123</td>
-                      <td>Paid</td>
-                      <td>
-                        <button className="btn btn-sm btn-primary">
-                          Detail
-                        </button>
-                      </td>
-                    </tr>
+                    {allInvoiceDB.map((item, i) => (
+                      <tr key={i}>
+                        <td>{item.id}</td>
+                        <td>{item.date}</td>
+                        <td>{item.invoice}</td>
+                        <td>{item.fullName}</td>
+                        <td>₱ {item.allTotal}</td>
+                        <td className=" ">paid</td>
+                        <td>
+                          {" "}
+                          <Button
+                            className="btn btn-danger"
+                            onClick={() => updateDetail(item.id)}
+                          >
+                            details
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
