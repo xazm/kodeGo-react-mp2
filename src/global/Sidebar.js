@@ -4,9 +4,9 @@ import MyImg from "../assets/MyImg.png";
 // import "bootstrap/js/dist/dropdown";
 import { Link } from "react-router-dom";
 
-function Sidebar({ sidebarOpen }) {
+function Sidebar({ isOpen }) {
   return (
-    <div id="sidebar-content" open={sidebarOpen}>
+    <div className={`sidebar ${isOpen ? "open " : ""}`}>
       <div className="sidebar pe-4 pb-3">
         <nav className="navbar navbar-dark">
           <div className=" d-flex align-items-center navbar-brand mx-4 mb-3">
@@ -18,7 +18,7 @@ function Sidebar({ sidebarOpen }) {
             />
             <h3 className="text-warning">M Autoshop</h3>
           </div>
-          {/* the rest of code sidebar */}
+
           <div className="d-flex align-items-center ms-4 mb-4">
             <div className="position-relative">
               <img
@@ -47,7 +47,7 @@ function Sidebar({ sidebarOpen }) {
               </div>
 
               <div className="dropdown-menu bg-transparent border-0">
-                <Link to="/invoice-form" className="dropdown-item">
+                <Link to="/invoice-form/:id" className="dropdown-item">
                   Invoice form
                 </Link>
                 <Link to="/quotation-form" className="dropdown-item">
@@ -65,6 +65,7 @@ function Sidebar({ sidebarOpen }) {
           </div>
         </nav>
       </div>
+      {/* </div> */}
     </div>
   );
 }

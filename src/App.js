@@ -25,7 +25,7 @@ function App(authenticate) {
             <>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/invoice-list" element={<InvoiceList />} />
-              <Route path="/invoice-form" element={<InvoicePage />} />
+              <Route path="/invoice-form/:id" element={<InvoicePage />} />
               <Route path="/quotation-form" element={<Quotation />} />
               <Route path="/quotaion-list" element={<QuotaionList />} />
             </>

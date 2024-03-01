@@ -10,14 +10,15 @@ import Footer from "./Footer";
 function RootLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  // Function to toggle the state of sidebarOpen
+  // Function to toggle the state of sidebarOpen from TopNav
   const toggleSidebar = () => {
     console.log("toggle");
     setSidebarOpen(!sidebarOpen);
   };
+
   return (
     <div>
-      <Sidebar open={sidebarOpen} className="nav-link active" />
+      <Sidebar toggleSidebar={toggleSidebar} />
       <div className="container-fluid position-relative d-flex p-0">
         <div className="content ">
           <TopNav toggleSidebar={toggleSidebar} />

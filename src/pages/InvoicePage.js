@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import companyLogo from "../assets/companyLogo.png";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "../css/style.css";
 import apiRequest from "../dataFetch/apiFetch";
+import { useParams } from "react-router-dom";
 
 function InvoicePage() {
   const [fullName, setFullName] = useState("");
@@ -19,7 +20,37 @@ function InvoicePage() {
   const [invoiceProd, setInvoiceProd] = useState([]);
   const [allTotal, setAlltotal] = useState("");
 
-  // modal
+  const getData = async (id) => {
+    const response = await fetch("http://localhost:5000/invoiceDetail/" + id);
+    const data = await response.json();
+
+    setFullName(data.fullName);
+    setAddress(data.address);
+    setContact(data.contact);
+    setInvoice(data.invoice);
+    setDate(data.date);
+    setMobile(data.mobile);
+    setQuantity(data.quantity);
+    setPrice(data.price);
+    setProduct(data.product);
+    setTotal(data.total);
+    setInvoiceProd(data.productDB);
+
+    const dataProd = data.productDB;
+
+    var allTotal = 0;
+    for (let i = 0; i < dataProd.length; i++) {
+      var subTotal = dataProd[i].total;
+      allTotal += parseFloat(subTotal);
+      console.log(allTotal);
+      setAlltotal(allTotal.toFixed(2));
+    }
+  };
+  const { id } = useParams();
+  useEffect(() => {
+    getData(id);
+  }, [id]);
+
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -64,6 +95,10 @@ function InvoicePage() {
     setProduct(product);
   };
 
+  const handlePrint = () => {
+    window.print();
+  };
+
   // modal save btn
   const handleSaveProd = async (id) => {
     const objReq = {
@@ -90,28 +125,12 @@ function InvoicePage() {
     );
 
     const dataProd = data.invoiceProductDB;
-    // // let dataInvoice = data.invoiceProductDB;
 
-    // // for (let i = 0; i < dataInvoice.length; i++) {
-    // //   for (let j = 0; i < dataInvoice[i].productDB.length; j++) {
-    // //     if (j === 0) {
-    // //       // console.log(dataInvoice[i].productDB[j]);
-
-    // //       // response
-    // //       setInvoiceProd(dataInvoice[i].productDB);
-    // //     }
-    // //   }
-    // // }
-    // if (data.code === "success") {
-    //   console.log("Ok save ");
-    // } else {
-    //   console.log("Not save");
-    // }
     var allTotal = 0;
     for (let i = 0; i < dataProd.length; i++) {
       var subTotal = dataProd[i].total;
       allTotal += parseFloat(subTotal);
-      console.log(allTotal);
+      console.log(subTotal);
       setAlltotal(allTotal.toFixed(2));
     }
 
@@ -217,6 +236,7 @@ function InvoicePage() {
             </div>
           </div>
         </form>
+        {/* some of my react code above */}
         <div className="table-responsive mt-3">
           <table className="table text-start align-middle table-bordered table-hover mb-0">
             <thead>
@@ -236,7 +256,9 @@ function InvoicePage() {
                 <th scope="col" className="col-1">
                   Total
                 </th>
-                <th scope="col">Action</th>
+                <th id="actionCol" scope="col">
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -248,7 +270,9 @@ function InvoicePage() {
                   <td>₱{item.price}</td>
                   <td>₱{item.total}</td>
 
-                  <td className=" col-md-2  col-sm-3 ">
+                  <td className=" col-md-2  col-sm-3 " id="actionCol">
+                    {" "}
+                    {/* I use ID to remove the action col for printing */}
                     <Button
                       variant="outline-info my-1 "
                       onClick={() => deleteItem(item.id)}
@@ -264,14 +288,17 @@ function InvoicePage() {
               ))}
             </tbody>
           </table>
-          <div className=" container-fluid justify-content-between btn-total">
+          <div
+            className=" container-fluid justify-content-between btn-total"
+            id="btn-total"
+          >
             <button
               className="btn btn-sm btn-warning my-2"
               onClick={handleShow}
             >
               add
             </button>
-            <div className=" col-xl-5 p-2 col-lg-6 col-sm-5 col-xs-12 ">
+            <div className=" col-xl-5 p-2 col-lg-6 col-sm-5 col-xs-12">
               <div className="d-flex col-lg-10   justify-content-between align-items-center">
                 <div className="h1">Total</div>
                 <div className="h3">₱{allTotal}</div>
@@ -279,10 +306,16 @@ function InvoicePage() {
             </div>
           </div>
           <div className=" mt-5 gap-2 mx-5 d-flex justify-content-end">
-            <Button variant="success">Paid</Button>{" "}
-            <Button variant="light">Draft</Button>{" "}
+            {/* {this.state.showButton && ( */}
+            <Button variant="danger" onClick={handlePrint}>
+              Print
+            </Button>
+            {/* )} */}
+            <Button variant="success">Paid</Button>
+            <Button variant="light">Draft</Button>
           </div>
         </div>
+        {/* some of my codes below */}
         <div>
           <Modal show={show} onHide={handleClose} className=" shadow ">
             <Modal.Header closeButton className="bg-secondary">

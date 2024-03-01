@@ -5,20 +5,20 @@ import "../css/style.css";
 import "../css/bootstrap.css";
 import { useState, useEffect } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
-function Dashboard() {
+function Dashboard({ setFullName, setAddress }) {
+  const Navigate = useNavigate();
   const [allInvoiceDB, setAllInvoiceDB] = useState([]);
 
   /// Functions
   // new invoice
   const createNewInvoice = () => {};
 
-  // update detail
-  const updateDetail = async (id) => {
-    const response = await fetch("http://localhost:5000//invoiceDetail/" + id);
-    const data = await response.json();
+  // btn update detail
+  const updateDetail = (id) => {
+    Navigate(`/invoice-form/${id}`);
   };
 
   //all Invoice DB
@@ -122,7 +122,6 @@ function Dashboard() {
                         <td>₱ {item.allTotal}</td>
                         <td className=" ">paid</td>
                         <td>
-                          {" "}
                           <Button
                             className="btn btn-danger"
                             onClick={() => updateDetail(item.id)}

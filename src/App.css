@@ -13,6 +13,26 @@
   }
 }
 
+@media print {
+  .buttons-container,
+  .btn,
+  Button,
+  #actionCol,
+  .topNav {
+    display: none !important;
+  }
+  #btn-total {
+    display: flex !important;
+    justify-content: flex-end !important;
+  }
+  #text {
+    color: black !important;
+  }
+  /* input {
+    border: none !important;
+  } */
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

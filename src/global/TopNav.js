@@ -3,8 +3,12 @@ import MyImg from "../assets/MyImg.png";
 import "bootstrap/js/dist/dropdown";
 
 function TopNav({ toggleSidebar }) {
+  const handelSearch = (e) => {
+    let searchTerm = e.target.value;
+    console.log(searchTerm);
+  };
   return (
-    <div className="">
+    <div className="topNav">
       <div className="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
         <div className="navbar-brand d-flex d-lg-none me-4">
           <h2 className="text-primary mb-0">
@@ -12,7 +16,6 @@ function TopNav({ toggleSidebar }) {
           </h2>
         </div>
         <div className="sidebar-toggler flex-shrink-0" onClick={toggleSidebar}>
-          {/* here's my topNav menu button, */}
           <i className="fa fa-bars"></i>
         </div>
 
@@ -21,9 +24,10 @@ function TopNav({ toggleSidebar }) {
             className="form-control bg-dark border-0"
             type="search"
             placeholder="Search"
+            onChange={handelSearch}
           />
         </form>
-        {/* some of my code */}
+
         <div className="navbar-nav align-items-center ms-auto">
           <div className="nav-item dropdown">
             <div className="nav-link dropdown-toggle" data-bs-toggle="dropdown">
