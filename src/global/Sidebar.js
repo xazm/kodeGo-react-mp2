@@ -35,7 +35,7 @@ function Sidebar({ isOpen }) {
             </div>
           </div>
           <div className="navbar-nav w-100">
-            <Link to="/dashboard" className="nav-item nav-link active">
+            <Link to="/dashboard" className="nav-item nav-link ">
               <i className="fa fa-tachometer-alt me-2"></i>Dashboard
             </Link>
             <div className="nav-item dropdown">

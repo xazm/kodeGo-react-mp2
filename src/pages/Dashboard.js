@@ -8,17 +8,21 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
-function Dashboard({ setFullName, setAddress }) {
+function Dashboard() {
   const Navigate = useNavigate();
   const [allInvoiceDB, setAllInvoiceDB] = useState([]);
-
+  // const [create, setCreate] = useState("");
   /// Functions
   // new invoice
   const createNewInvoice = () => {};
 
   // btn update detail
-  const updateDetail = (id) => {
-    Navigate(`/invoice-form/${id}`);
+  const updateDetail = async (id) => {
+    const response = await fetch("http://localhost:5000/invoiceDetail/" + id);
+    const data = await response.json();
+    // Navigate(`/invoice-form/${id}`);
+    console.log(id);
+    Navigate("/invoice-form/" + id);
   };
 
   //all Invoice DB

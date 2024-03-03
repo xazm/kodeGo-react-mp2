@@ -38,18 +38,41 @@ function InvoicePage() {
 
     const dataProd = data.productDB;
 
-    var allTotal = 0;
+    let allTotal = 0;
     for (let i = 0; i < dataProd.length; i++) {
       var subTotal = dataProd[i].total;
       allTotal += parseFloat(subTotal);
-      console.log(allTotal);
-      setAlltotal(allTotal.toFixed(2));
     }
+    setAlltotal(allTotal.toFixed(2));
+    getDataProd();
   };
   const { id } = useParams();
   useEffect(() => {
     getData(id);
   }, [id]);
+
+  const getDataProd = async () => {
+    const token = localStorage.getItem("accessToken");
+    // let newToken = token.replace(/"/g, "");
+    let newToken = token;
+    // console.log(token);
+    const response = await fetch("http://localhost:5000/get_invoice_detail", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${newToken}`,
+      },
+    });
+    // .then((response) => {
+    //   return response.json();
+    // })
+    // .then((data) => {
+    console.log("This is data " + newToken);
+    // });
+  };
+
+  // useEffect(() => {
+  //   getDataProd();
+  // }, []); // on load page
 
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
@@ -100,14 +123,14 @@ function InvoicePage() {
   };
 
   // modal save btn
-  const handleSaveProd = async (id) => {
+  const handleSaveProd = async () => {
     const objReq = {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body:
-        "id=" +
+        "prod_id=" +
         id +
         "&qty=" +
         quantity +
@@ -264,7 +287,7 @@ function InvoicePage() {
             <tbody>
               {invoiceProd.map((item, i) => (
                 <tr key={i}>
-                  <td>{item.id}</td>
+                  <td>{item.prod_id}</td>
                   <td>{item.qty}</td>
                   <td>{item.product}</td>
                   <td>₱{item.price}</td>
